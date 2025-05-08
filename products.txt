@@ -1,0 +1,4 @@
+1,Vitamin C serum,this is a long brand name,835,1500.0,this is a very long country name
+3,Sunscreen,Aqualogica,4442,1.0,India
+4,jfiajefo,feifje,148,39053.0,39fi3
+5,fiajef,fjeokljfsn,45,5.0,japan

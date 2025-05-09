@@ -258,7 +258,7 @@ def sell_item():
                 print("👥 CONTINUE WITH NEW CUSTOMER?")
                 print("─" * 60)
                 new_customer = input("Want to sell to another customer? (Y/N): ")
-                if new_customer.lower() != "y":
+                if new_customer != "y" and new_customer != "Y":
                     print("\n" + "─" * 60)
                     return
                 # If "yes", the loop will continue and start again
@@ -437,7 +437,7 @@ def buy_items():
                 print("🔄 CONTINUE WITH CURRENT VENDOR?")
                 print("─" * 60)
                 user_input = input("Continue buying from "+  str(vendor_name) +"? (Y/N): ")
-                if user_input.lower() != "y":
+                if user_input != "y" and user_input != "Y":
                     keep_managing = False
 
             except ValueError:

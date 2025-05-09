@@ -134,9 +134,9 @@ def sell_item():
     """
     while True:  # Outer loop for multiple customers
         print("""
-╔══════════════════════════════════════════════════╗
-║              🛒 SALES MANAGEMENT 🛒              ║
-╚══════════════════════════════════════════════════╝
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                        🛒 SALES MANAGEMENT 🛒                                 ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
 """)
         display_all_products()
         
@@ -188,6 +188,8 @@ def sell_item():
                         quantity = int(input("📦 Enter Quantity to Purchase: "))
                         if quantity > quantity_for_sale:
                             print("⚠️ Insufficient stock. We can only sell "+ str(quantity_for_sale) +" items to maintain buy three get one free policy")
+                        elif quantity <= 0:
+                            print("⚠️ Invalid quantity. Please enter a positive number.")
                         else:
                             break
                     except ValueError:
@@ -293,9 +295,9 @@ def buy_items():
     """
     while True:  # Outer loop for multiple vendors
         print("""
-╔══════════════════════════════════════════════════╗
-║             📦 STOCK MANAGEMENT 📦              ║
-╚══════════════════════════════════════════════════╝
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                              📦 STOCK MANAGEMENT 📦                          ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
 """)
         display_all_products()
         # store the data from the file to data variable
@@ -345,7 +347,7 @@ def buy_items():
                     # Get new quantity with validation
                     while True:
                         new_qty_input = input("📦 Quantity to Add: ")
-                        if new_qty_input.isdigit() and int(new_qty_input) >= 0:
+                        if check_digit_(new_qty_input) and int(new_qty_input) >= 0:
                             new_qty = int(new_qty_input)
                             break
                         print("❌ Invalid quantity. Please enter a non-negative number.")
@@ -392,7 +394,7 @@ def buy_items():
                     # Get quantity with validation
                     while True:
                         new_item_qty_input = input("📦 Quantity: ")
-                        if new_item_qty_input.isdigit() and int(new_item_qty_input) > 0:
+                        if check_digit_(new_item_qty_input) and int(new_item_qty_input) > 0:
                             new_item_qty = int(new_item_qty_input)
                             break
                         print("❌ Invalid quantity. Please enter a positive number.")
@@ -481,3 +483,13 @@ def buy_items():
         else:
             print("\n❗ No items were added or restocked.")
             return
+        
+def check_digit_(string):
+    is_digit=False
+    for each in string:
+        try:
+            int(each)
+            is_digit = True
+        except ValueError:
+            pass
+    return is_digit

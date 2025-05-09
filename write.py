@@ -31,21 +31,19 @@ def save_to_inventory(data):
                 if int(data[key][3]) < 1:
                     data.pop(key)
             except (ValueError, IndexError):
-                print(f"⚠️ Warning: Invalid quantity data for product ID {key}")
+                print("⚠️ Warning: Invalid quantity data for product ID " + {key})
         
         # Write the filtered data to file
         with open('products.txt', 'w') as f:
             for key in sorted(data.keys()):
                 f.write(','.join(str(field).strip() for field in data[key]) + '\n')
         
-        # Prepare result message
-        success_msg = "✅ Inventory data updated successfully"
         
-        return True, success_msg
+        print("✅ Inventory data updated successfully")
     except IOError as e:
-        return False, f"❌ Error writing data: {e}"
+        print("❌ Error writing to file: " + {e})
     except Exception as e:
-        return False, f"❌ An unexpected error occurred: {e}"
+        print("❌ An unexpected Error occured while writing to file: " + {e})
 
 def buy_items_invoice(vendor_name, items_list):
     """
@@ -139,13 +137,13 @@ def buy_items_invoice(vendor_name, items_list):
         
             
         # Write to file with UTF-8 encoding
-        with open(f'{invoice_number}.txt', 'w', encoding='utf-8') as f:
+        with open('purchase_' + invoice_number +'.txt', 'w', encoding='utf-8') as f:
             f.write(invoice_content)
             
-        print("✅ Invoice generated Successfully: " + invoice_number + ".txt")
+        print("✅ Invoice generated Successfully: purchase_" + invoice_number + ".txt")
         
     except Exception as e:
-        print(f"❌ Error generating invoice: {e}")
+        print("❌ Error generating invoice: " + str(e))
         
 
 
@@ -229,10 +227,10 @@ def sell_item_invoice(customer_name, items_for_invoice):
 """
 
         # Write to file with UTF-8 encoding
-        with open('sell'+invoice_number + '.txt', 'w', encoding='utf-8') as f:
+        with open('sell_'+invoice_number + '.txt', 'w', encoding='utf-8') as f:
             f.write(invoice_content)
 
-        print("✅ Invoice generated Successfully: " + invoice_number + ".txt")
+        print("✅ Invoice generated Successfully: sell_" + invoice_number + ".txt")
 
     except Exception as e:
-        print(f"❌ Error generating invoice: {e}")
+        print("❌ Error generating invoice: " + str(e))

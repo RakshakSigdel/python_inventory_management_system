@@ -9,7 +9,7 @@ Author: [Rakshak Sigdel]
 Version: 1.0
 """
 
-from operation import sell_item, display_menu,display_all_products,buy_items,display_menu
+from operation import sell_items, display_menu,display_all_products,buy_items,display_menu
 
 def main():
     """
@@ -46,7 +46,7 @@ def main():
                 display_menu()
             elif user_input == '2':
                 print("💲You choose to sell items.")
-                sell_item()
+                sell_items()
                 input("🏠Press Enter to return to main menu...")
                 display_menu()
             elif user_input == '3':

@@ -35,7 +35,7 @@ def save_to_inventory(data):
         
         # Write the filtered data to file
         with open('products.txt', 'w') as f:
-            for key in sorted(data.keys()):
+            for key in (data.keys()):
                 f.write(','.join(str(field).strip() for field in data[key]) + '\n')
         
         
@@ -102,21 +102,15 @@ def buy_items_invoice(vendor_name, items_list):
 ╠═════════════════════════════════════════════════════════════════════════════╣
 """
         
-        # Add each item to the invoice
-        for i, item in enumerate(items_list):
+        index = 0
+        length = len(items_list)
+        while index < length:
+            item = items_list[index]
             item_cost = int(item['qty']) * float(item['cost'])
-            invoice_content += f"""║                                                                              ║
-║  Item {i+1}                                                                     ║
-║  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  ║
-║  Product ID: #{item['id']}                                                  ║  
-║  Product Name: {item['name']}                                                ║ 
-║                                                                              ║
-║  Quantity: {item['qty']} units    ×    Unit Cost: ${float(item['cost']):.2f}           
-║                                                Subtotal: ${item_cost:.2f}     
-║                                                                              ║
-"""
-            if i < len(items_list) - 1:
+            invoice_content += f"""║                                                                              ║\n║  Item {index+1}                                                                     ║\n║  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  ║\n║  Product ID: #{item['id']}                                                  ║  \n║  Product Name: {item['name']}                                                ║ \n║                                                                              ║\n║  Quantity: {item['qty']} units    ×    Unit Cost: ${float(item['cost']):.2f}           \n║                                                Subtotal: ${item_cost:.2f}     \n║                                                                              ║\n"""
+            if index < length - 1:
                 invoice_content += "╠══════════════════════════════════════════════════════════════════════════════╣\n"
+            index += 1
         
         invoice_content += f"""╠══════════════════════════════════════════════════════════════════════════════╣
 ║                                                                              ║
@@ -165,7 +159,8 @@ def sell_item_invoice(customer_name, items_for_invoice):
         total_cost = 0
         for item in items_for_invoice:
             total_cost += item[4]
-
+        tax_amount = total_cost * 0.13  
+        total_amount = total_cost + tax_amount 
         # Get current date and time for invoice
         now = datetime.now()
 
@@ -191,7 +186,6 @@ def sell_item_invoice(customer_name, items_for_invoice):
 ╠═════════════════════════════════════════════════════════════════════════════╣
 """
 
-        # Manual counter since enumerate is not allowed
         index = 0
         length = len(items_for_invoice)
         while index < length:
@@ -201,6 +195,7 @@ def sell_item_invoice(customer_name, items_for_invoice):
 ║  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━║
 ║  Product ID: #{item[0]}                                                                     
 ║  Product Name: {item[1]}                                         
+║  Brand Name: {item[6]}                                         
 ║                                                                              
 ║  Quantity: {item[2]} units    ×    Unit Cost: ${item[5]:.2f}      
 ║                                                Subtotal: ${item[4]:.2f}     
@@ -214,6 +209,8 @@ def sell_item_invoice(customer_name, items_for_invoice):
         invoice_content += f"""╠═════════════════════════════════════════════════════════════════════════════╣
 ║                                                                             ║
 ║  💰 TOTAL COST:                                          ${total_cost:.2f} 
+║  💰 Tax Amount:                                          ${tax_amount:.2f} 
+║  💰 TOTAL Amount:                                          ${total_amount:.2f} 
 ║                                                                             ║
 ╠═════════════════════════════════════════════════════════════════════════════╣
 ║                                                                             ║

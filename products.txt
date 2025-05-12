@@ -1,4 +1,4 @@
-1,Vitamin C serum,this is a long brand name,839,24.0,this is a very long country name
-3,Sunscreen,Aqualogica,4442,1.0,India
-4,jfiajefo,feifje,148,39053.0,39fi3
-5,fiajef,fjeokljfsn,45,5.0,japan
+2,Skin Cleanser,Cetaphil,600,300.0,Switzerland
+3,Sunscreen,Aqualogica,200,700,India
+4,Aqua Bomb Cream,Belif,500,400.0,South Korea
+5,Rice water bright cleansing form,The Face Shop,100,500.0,Japan

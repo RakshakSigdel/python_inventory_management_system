@@ -35,10 +35,10 @@ def display_menu():
 ╠════════════════════════════════════════════════════════════╣
 ║<~•~•~•~•~•~•~•~•~•~ Management Options ~•~•~•~•~•~•~•~•~•~>║
 ║▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓║
-║                1️  ✨ SHOW ME THE GOODS ✨                 ║
-║                2️  💸 SELL STUFF 💸                        ║
-║                3️  🔄 RESTOCK THE SHELVES 🔄               ║
-║                4️  👋 PEACE OUT 👋                         ║
+║                1️  ✨ SHOW ME THE GOODS ✨               ║
+║                2️  💸 SELL STUFF 💸                      ║
+║                3️  🔄 RESTOCK THE SHELVES 🔄             ║
+║                4️  👋 PEACE OUT 👋                       ║
 ╚════════════════════════════════════════════════════════════╝
 """)
 
@@ -110,7 +110,7 @@ def display_all_products():
     # Print table footer
     print("╚" + "═" * 79 + "╝")
     
-def sell_item():
+def sell_items():
     """
     Manages the process of selling items to customers.
     
@@ -174,9 +174,9 @@ def sell_item():
                 quantity_for_sale = available_quantity - (available_quantity // 4) #To maintain the buy 3 get 1 free policy
                 # Display selected product information
                 print("\n" + "─" * 60)
-                print("🏷️ SELECTED: Item #" + str(product_id) + " - " + data[product_id][0])
+                print("🏷️ SELECTED: Item #" + str(product_id) + " - " + data[product_id][1])
                 print("─" * 60)
-                print("• Brand: " + data[product_id][1])
+                print("• Brand: " + data[product_id][2])
                 print("• Quantity in stock: " + str(data[product_id][3]))
                 print("• Available for sale: " + str(quantity_for_sale))
                 print("• Unit Price: $" + str(round(float(data[product_id][4]), 2)))
@@ -220,7 +220,9 @@ def sell_item():
                     quantity,
                     free_product,
                     total_cost,
-                    unit_cost
+                    unit_cost,
+                    data[product_id][2]
+                    
                 ])
                 #update the data file
                 save_to_inventory(data)
@@ -296,7 +298,7 @@ def buy_items():
     while True:  # Outer loop for multiple vendors
         print("""
 ╔═══════════════════════════════════════════════════════════════════════════════╗
-║                              📦 STOCK MANAGEMENT 📦                          ║
+║                              📦 STOCK MANAGEMENT 📦                           ║
 ╚═══════════════════════════════════════════════════════════════════════════════╝
 """)
         display_all_products()
@@ -369,8 +371,6 @@ def buy_items():
                     data[product_id][3] = str(new_total)
                     # Update cost
                     data[product_id][4] = str(float_cost)
-                    #update the data file
-                    save_to_inventory(data)
                     #Add items to list for invoice
                     items_for_invoice.append({
                         'id': product_id,
@@ -378,6 +378,7 @@ def buy_items():
                         'qty': new_qty,
                         'cost': float_cost
                     })
+                    
                     
                     print("✅ Successfully restocked " + str(new_qty) + " units of " + str(item_name))
 
@@ -429,8 +430,8 @@ def buy_items():
                     })
                     
                     print("✅ Successfully added " + str(new_item_qty) + " units of " + str(new_item_name))
-                    #updating the data
-                    save_to_inventory(data)
+                #updating the data
+                save_to_inventory(data)
 
                 # Ask to continue with current vendor
                 print("\n" + "─" * 60)

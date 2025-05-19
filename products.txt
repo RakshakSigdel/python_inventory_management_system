@@ -1,4 +1,4 @@
-2,Skin Cleanser,Cetaphil,600,300.0,Switzerland
+2,Skin Cleanser,Cetaphil,596,300.0,Switzerland
 3,Sunscreen,Aqualogica,200,700,India
 4,Aqua Bomb Cream,Belif,500,400.0,South Korea
 5,Rice water bright cleansing form,The Face Shop,100,500.0,Japan
